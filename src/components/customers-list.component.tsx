@@ -1,29 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-interface IName {
-  first: string;
-  last: string;
-}
-interface ICustomer {
-  customerID: number;
-  name: IName;
-  birthday: string;
-  gender: string;
-  lastContact: string;
-  customerLifetimeValue: number;
-}
+import { ICustomer } from "../assets/interfaces";
 
-interface ICustomersList {
-  customers: ICustomer[];
-}
-
-const CustomersList: React.FC<ICustomersList> = ({ customers }) => {
-  console.log(customers);
-
+const CustomersList: React.FC<{ customers: ICustomer[] }> = ({ customers }) => {
   const onClickDelete = (id: number): void => {
-    window.confirm("Are you sure");
-    console.log(id);
+    const res = window.confirm("Are you sure");
+    if (res) {
+    }
   };
   return (
     <div>
