@@ -4,7 +4,7 @@ export interface IName {
 }
 export interface ICustomer {
   customerID: number;
-  name: IName;
+  name: string;
   birthday: string;
   gender: string;
   lastContact: string;

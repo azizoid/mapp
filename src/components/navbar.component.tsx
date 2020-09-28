@@ -22,13 +22,13 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <Link className="nav-link" to="/customers">
+            <Link className="nav-link" to="/">
               Customers List <span className="sr-only">(current)</span>
             </Link>
           </li>
           <li className="nav-item">
             <Link
-              to="/customers/add"
+              to="/add"
               className="nav-link btn btn-outline-success my-2 my-sm-0"
             >
               Add Customer
