@@ -1,16 +1,14 @@
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
+import Navbar from "./components/navbar.component";
 import Overview from "./pages/overview.page";
 import Details from "./pages/details.page";
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <Link to="/overview">Overview</Link>
-        <Link to="/details/1">Details</Link>
-      </div>
+      <Navbar />
       <div className="container">
         <Switch>
           <Route path="/overview" component={Overview} />
