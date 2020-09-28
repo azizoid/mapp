@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 
 import CustomersList from "../components/customers-list.component";
 
 import database from "../assets/customers-sample.json";
 
 const Overview = () => {
+  const context = createContext(database);
+
   const [customers, setCustomers] = useState(database);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(context);
+  }, []);
 
   return (
     <div>

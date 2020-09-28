@@ -1,21 +1,25 @@
-import React from "react";
+import React, { createContext } from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Navbar from "./components/navbar.component";
-import Overview from "./pages/overview.page";
-import Details from "./pages/details.page";
+import CustomersList from "./pages/customers-list.page";
+import AddCustomer from "./pages/add-customer.page";
+import EditCustomer from "./pages/edit-customer.page";
 
 function App() {
+  const customersStore = createContext([]);
+
   return (
     <div className="App">
       <Navbar />
       <div className="container">
         <Switch>
-          <Route path="/overview" component={Overview} />
+          <Route path="/customers" component={CustomersList} exact={true} />
+          <Route path="/customers/add" component={AddCustomer} />
           <Route
-            path="/details/:id"
+            path="/customer/:id"
             render={(q) => {
-              return <Details id={Number(q.match.params.id)} />;
+              return <EditCustomer id={Number(q.match.params.id)} />;
             }}
           />
         </Switch>

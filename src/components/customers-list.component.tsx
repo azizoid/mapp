@@ -20,12 +20,13 @@ interface ICustomersList {
 
 const CustomersList: React.FC<ICustomersList> = ({ customers }) => {
   console.log(customers);
+
+  const onClickDelete = (id: number): void => {
+    window.confirm("Are you sure");
+    console.log(id);
+  };
   return (
     <div>
-      <Link to="/customers/add" className="btn btn-success">
-        Add Customer
-      </Link>
-      <hr />
       <table className="table table-striped">
         <tbody>
           {customers.map((customer, index) => (
@@ -38,14 +39,17 @@ const CustomersList: React.FC<ICustomersList> = ({ customers }) => {
               <td>{customer.lastContact}</td>
               <td>{customer.customerLifetimeValue}</td>
               <td>
-                <Link to="/" className="edit">
+                <Link to={`/customer/${customer.customerID}`} className="edit">
                   edit
                 </Link>
               </td>
               <td>
-                <Link to="/" className="delete btn btn-sm btn-danger">
+                <button
+                  className="delete btn btn-sm btn-danger"
+                  onClick={() => onClickDelete(customer.customerID)}
+                >
                   x
-                </Link>
+                </button>
               </td>
             </tr>
           ))}
