@@ -6,18 +6,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { AppContext } from "../context";
 import { ICustomer } from "../assets/interfaces";
 
-type Inputs = {
-  name: string;
-  birthday: string;
-  gender: "m" | "w";
-  lastContact: string;
-  customerLifetimeValue: string;
-};
-
 const AddCustomer: React.FC = () => {
   const context = useContext(AppContext);
   const history = useHistory();
-  const { register, handleSubmit, errors } = useForm<Inputs>();
+  const { register, handleSubmit, errors } = useForm<ICustomer>();
 
   const [form, setForm] = useState<ICustomer>({
     customerID: Math.random(),
@@ -35,13 +27,13 @@ const AddCustomer: React.FC = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onHandleSubmit: SubmitHandler<Inputs> = () => {
+  const onHandleSubmit: SubmitHandler<ICustomer> = () => {
     context.setCustomers((prev: ICustomer[]) => [...prev, form]);
-    console.log(form);
     history.push("/");
   };
 
-  if (!form) return <div>Nothing to display</div>;
+  if (!form) return <div>Nothing to display yet</div>;
+
   return (
     <form name="formData" onSubmit={handleSubmit(onHandleSubmit)}>
       <h2>New Customer Details</h2>
@@ -56,16 +48,14 @@ const AddCustomer: React.FC = () => {
             id="firstNameInput"
             placeholder="First name, Last name"
             onChange={onChangeHandler}
-            defaultValue={form.name}
             name="name"
             ref={register({
               required: true,
               // pattern: /^\w+, \w+$/i,
             })}
           />
-
           {errors.name && (
-            <small className="text-danger ">
+            <small className="text-danger">
               Please type your Full name: First Name, Last Name.
             </small>
           )}
@@ -81,18 +71,17 @@ const AddCustomer: React.FC = () => {
             type="text"
             className="form-control"
             id="birthdayInput"
-            placeholder="dd-mm-yyyy"
+            placeholder="yyyy-mm-dd"
             onChange={onChangeHandler}
-            defaultValue={form.birthday}
             name="birthday"
             ref={register({
               required: true,
-              pattern: /^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i,
+              pattern: /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/i,
             })}
           />
           {errors.birthday && (
             <small className="text-danger ">
-              Please type birthday with dd-mm-yyyy pattern.
+              Please type birthday with yyyy-mm-dd pattern.
             </small>
           )}
         </div>
@@ -107,7 +96,6 @@ const AddCustomer: React.FC = () => {
             className="form-control"
             id="genderInput"
             onChange={onChangeHandler}
-            defaultValue={form.gender}
             name="gender"
             ref={register({
               required: true,
@@ -139,7 +127,6 @@ const AddCustomer: React.FC = () => {
               required: true,
             })}
           />
-
           {errors.lastContact && (
             <small className="text-danger">
               Please type Last Contact Date.
@@ -153,7 +140,7 @@ const AddCustomer: React.FC = () => {
         </label>
         <div className="col-sm-10">
           <input
-            type="number"
+            type="text"
             className="form-control "
             id="lifetimeInput"
             defaultValue={form.customerLifetimeValue}
@@ -163,7 +150,6 @@ const AddCustomer: React.FC = () => {
               required: true,
             })}
           />
-
           {errors.customerLifetimeValue && (
             <small className="text-danger ">
               Please customer Lifetime Value: Number.
