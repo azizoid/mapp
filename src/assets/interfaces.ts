@@ -1,12 +1,9 @@
-export interface IName {
-  first: string;
-  last: string;
-}
+
 export interface ICustomer {
   customerID: number;
   name: string;
   birthday: string;
-  gender: string;
+  gender: "m" | "w";
   lastContact: string;
   customerLifetimeValue: number;
 }
